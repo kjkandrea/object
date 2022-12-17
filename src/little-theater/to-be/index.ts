@@ -90,8 +90,21 @@ class TicketSeller {
     this.ticketOffice = ticketOffice;
   }
 
-  public getTicketOffice(): TicketOffice {
-    return this.ticketOffice;
+  public sellTo(audience: Audience): void {
+    // 초대받은 손님
+    if (audience.getBag().hasInvitation()) {
+      const ticket = this.ticketOffice.getTicket();
+      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
+      audience.getBag().setTicket(ticket);
+    }
+    // or 돈주고 사세요
+    else {
+      const ticket = this.ticketOffice.getTicket();
+      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
+      audience.getBag().minusAmount(ticket.getFee());
+      this.ticketOffice.plusAmount(ticket.getFee());
+      audience.getBag().setTicket(ticket);
+    }
   }
 }
 
@@ -103,19 +116,6 @@ export class Theater {
   }
 
   public enter(audience: Audience): void {
-    // 초대받은 손님
-    if (audience.getBag().hasInvitation()) {
-      const ticket = this.ticketSeller.getTicketOffice().getTicket();
-      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
-      audience.getBag().setTicket(ticket);
-    }
-    // or 돈주고 사세요
-    else {
-      const ticket = this.ticketSeller.getTicketOffice().getTicket();
-      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
-      audience.getBag().minusAmount(ticket.getFee());
-      this.ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-      audience.getBag().setTicket(ticket);
-    }
+    this.ticketSeller.sellTo(audience);
   }
 }
