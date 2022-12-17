@@ -78,3 +78,15 @@ class TicketOffice {
     this.amount += amount;
   }
 }
+
+class TicketSeller {
+  private ticketOffice: TicketOffice;
+
+  constructor(ticketOffice: TicketOffice) {
+    this.ticketOffice = ticketOffice;
+  }
+
+  public getTicketOffice(): TicketOffice {
+    return this.ticketOffice;
+  }
+}
