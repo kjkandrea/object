@@ -10,10 +10,17 @@ class Ticket {
   }
 }
 
+// 관람객의 가방
 class Bag {
-  private amount = 0;
-  private invitation?: Invitation;
+  private amount: number;
+  private readonly invitation?: Invitation;
   private ticket?: Ticket;
+
+  // 현금만 있거나, 초대장과 현금이 있거나
+  constructor(amount: number, invitation?: Invitation) {
+    this.amount = amount;
+    this.invitation = invitation;
+  }
 
   public hasInvitation(): boolean {
     return this.invitation !== undefined;
