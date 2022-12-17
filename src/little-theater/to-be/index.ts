@@ -45,7 +45,7 @@ class Bag {
     this.ticket = ticket;
   }
 
-  private minusAmount(amount: number): void {
+  public minusAmount(amount: number): void {
     this.amount -= amount;
   }
 }
@@ -75,15 +75,13 @@ class TicketOffice {
     this.tickets = tickets;
   }
 
-  public sellTicketTo(audience: Audience): void {
-    this.plusAmount(audience.buy(this.getTicket()));
+  // 배열 맨 앞의 티켓
+  public getTicket(): Ticket | undefined {
+    return this.tickets.pop();
   }
 
-  // 배열 맨 앞의 티켓
-  private getTicket(): Ticket {
-    const ticket = this.tickets.pop();
-    if (!ticket) throw new Error('티켓이 다 떨어졌네요!');
-    return ticket;
+  public minusAmount(amount: number): void {
+    this.amount -= amount;
   }
 
   public plusAmount(amount: number): void {
@@ -99,7 +97,9 @@ class TicketSeller {
   }
 
   public sellTo(audience: Audience): void {
-    this.ticketOffice.sellTicketTo(audience);
+    const ticket = this.ticketOffice.getTicket();
+    if (!ticket) throw new Error('매표소에 티켓이 없어요!');
+    this.ticketOffice.plusAmount(audience.buy(ticket));
   }
 }
 
