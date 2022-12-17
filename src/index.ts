@@ -1,1 +1,1 @@
-import './little-theater/as-is';
+import './little-theater/to-be';
