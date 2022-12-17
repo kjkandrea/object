@@ -80,7 +80,7 @@ class TicketOffice {
 }
 
 class TicketSeller {
-  private ticketOffice: TicketOffice;
+  private readonly ticketOffice: TicketOffice;
 
   constructor(ticketOffice: TicketOffice) {
     this.ticketOffice = ticketOffice;
@@ -88,5 +88,30 @@ class TicketSeller {
 
   public getTicketOffice(): TicketOffice {
     return this.ticketOffice;
+  }
+}
+
+class Theater {
+  private ticketSeller: TicketSeller;
+
+  constructor(ticketSeller: TicketSeller) {
+    this.ticketSeller = ticketSeller;
+  }
+
+  public enter(audience: Audience): void {
+    // 초대받은 손님
+    if (audience.getBag().hasInvitation()) {
+      const ticket = this.ticketSeller.getTicketOffice().getTicket();
+      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
+      audience.getBag().setTicket(ticket);
+    }
+    // or 돈주고 사세요
+    else {
+      const ticket = this.ticketSeller.getTicketOffice().getTicket();
+      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
+      audience.getBag().minusAmount(ticket.getFee());
+      this.ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
+      audience.getBag().setTicket(ticket);
+    }
   }
 }
