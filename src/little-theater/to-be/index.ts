@@ -80,10 +80,6 @@ class TicketOffice {
     return this.tickets.pop();
   }
 
-  public minusAmount(amount: number): void {
-    this.amount -= amount;
-  }
-
   public plusAmount(amount: number): void {
     this.amount += amount;
   }
