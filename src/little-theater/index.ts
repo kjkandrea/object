@@ -42,3 +42,15 @@ class Bag {
     this.amount += amount;
   }
 }
+
+class Audience {
+  private bag: Bag;
+
+  constructor(bag: Bag) {
+    this.bag = bag;
+  }
+
+  public getBag(): Bag {
+    return this.bag;
+  }
+}
