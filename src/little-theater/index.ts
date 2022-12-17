@@ -44,7 +44,7 @@ class Bag {
 }
 
 class Audience {
-  private bag: Bag;
+  private readonly bag: Bag;
 
   constructor(bag: Bag) {
     this.bag = bag;
