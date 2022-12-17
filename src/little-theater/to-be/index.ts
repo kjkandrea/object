@@ -93,6 +93,7 @@ class TicketSeller {
   }
 
   public sellTo(audience: Audience): void {
+    // TicketOffice 의 자율성 보다는 Audience 에 대한 결합도를 낮추는 것이 더 중요하다.
     const ticket = this.ticketOffice.getTicket();
     if (!ticket) throw new Error('매표소에 티켓이 없어요!');
     this.ticketOffice.plusAmount(audience.buy(ticket));
