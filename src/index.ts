@@ -1,1 +1,1 @@
-import './little-theater/index.ts';
+import './little-theater/as-is';
