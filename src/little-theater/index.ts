@@ -54,3 +54,27 @@ class Audience {
     return this.bag;
   }
 }
+
+// 매표소
+class TicketOffice {
+  private amount: number;
+  private tickets: Ticket[] = [];
+
+  constructor(amount: number, tickets: Ticket[]) {
+    this.amount = amount;
+    this.tickets = tickets;
+  }
+
+  // 배열 맨 앞의 티켓
+  public getTicket(): Ticket | undefined {
+    return this.tickets.pop();
+  }
+
+  public minusAmount(amount: number): void {
+    this.amount -= amount;
+  }
+
+  public plusAmount(amount: number): void {
+    this.amount += amount;
+  }
+}
