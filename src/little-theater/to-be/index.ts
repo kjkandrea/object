@@ -54,8 +54,18 @@ class Audience {
     this.bag = bag;
   }
 
-  public getBag(): Bag {
-    return this.bag;
+  /**
+   * @return 지불된 금액
+   */
+  public buy(ticket: Ticket): number {
+    if (this.bag.hasInvitation()) {
+      this.bag.setTicket(ticket);
+      return 0;
+    } else {
+      this.bag.setTicket(ticket);
+      this.bag.minusAmount(ticket.getFee());
+      return ticket.getFee();
+    }
   }
 }
 
@@ -91,20 +101,9 @@ class TicketSeller {
   }
 
   public sellTo(audience: Audience): void {
-    // 초대받은 손님
-    if (audience.getBag().hasInvitation()) {
-      const ticket = this.ticketOffice.getTicket();
-      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
-      audience.getBag().setTicket(ticket);
-    }
-    // or 돈주고 사세요
-    else {
-      const ticket = this.ticketOffice.getTicket();
-      if (!ticket) throw new Error('매표소에 티켓이 없어요!');
-      audience.getBag().minusAmount(ticket.getFee());
-      this.ticketOffice.plusAmount(ticket.getFee());
-      audience.getBag().setTicket(ticket);
-    }
+    const ticket = this.ticketOffice.getTicket();
+    if (!ticket) throw new Error('매표소에 티켓이 없어요!');
+    this.ticketOffice.plusAmount(audience.buy(ticket));
   }
 }
 
