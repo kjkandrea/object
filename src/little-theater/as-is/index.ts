@@ -1,5 +1,9 @@
 class Invitation {
-  private when?: Date;
+  private when: Date;
+
+  constructor(when: Date) {
+    this.when = when;
+  }
 }
 
 class Ticket {
