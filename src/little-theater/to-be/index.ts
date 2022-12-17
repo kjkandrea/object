@@ -26,24 +26,27 @@ class Bag {
     this.invitation = invitation;
   }
 
-  public hasInvitation(): boolean {
+  public hold(ticket: Ticket): number {
+    if (this.hasInvitation()) {
+      this.setTicket(ticket);
+      return 0;
+    } else {
+      this.setTicket(ticket);
+      this.minusAmount(ticket.getFee());
+      return ticket.getFee();
+    }
+  }
+
+  private hasInvitation(): boolean {
     return this.invitation !== undefined;
   }
 
-  public hasTicket(): boolean {
-    return this.ticket !== undefined;
-  }
-
-  public setTicket(ticket: Ticket): void {
+  private setTicket(ticket: Ticket): void {
     this.ticket = ticket;
   }
 
   public minusAmount(amount: number): void {
     this.amount -= amount;
-  }
-
-  public plusAmount(amount: number): void {
-    this.amount += amount;
   }
 }
 
@@ -58,14 +61,7 @@ class Audience {
    * @return 지불된 금액
    */
   public buy(ticket: Ticket): number {
-    if (this.bag.hasInvitation()) {
-      this.bag.setTicket(ticket);
-      return 0;
-    } else {
-      this.bag.setTicket(ticket);
-      this.bag.minusAmount(ticket.getFee());
-      return ticket.getFee();
-    }
+    return this.bag.hold(ticket);
   }
 }
 
