@@ -1,10 +1,14 @@
 abstract class Movie {
   public abstract getFee(): number;
+  // 1인당 예매 요금
+  public abstract calculateMovieFee(screening: Screening): Money;
 }
 
 abstract class Customer {}
 
-abstract class Money {}
+abstract class Money {
+  public abstract times(percent: number): Money;
+}
 
 class Reservation {
   private customer: Customer;
@@ -58,6 +62,6 @@ class Screening {
   }
 
   private calculateFee(audienceCount: number): Money {
-    return {};
+    return this.movie.calculateMovieFee(this).times(audienceCount);
   }
 }
