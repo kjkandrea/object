@@ -2,9 +2,32 @@ abstract class Movie {
   public abstract getFee(): number;
 }
 
+abstract class Customer {}
+
+abstract class Money {}
+
+class Reservation {
+  private customer: Customer;
+  private screening: Screening;
+  private fee: Money;
+  private audienceCount: number;
+
+  constructor(
+    customer: Customer,
+    screening: Screening,
+    fee: Money,
+    audienceCount: number
+  ) {
+    this.customer = customer;
+    this.screening = screening;
+    this.fee = fee;
+    this.audienceCount = audienceCount;
+  }
+}
+
 class Screening {
   private movie: Movie;
-  private sequence: number; // 순번
+  private readonly sequence: number; // 순번
   private readonly whenScreened: Date; // 상영 시작 시간
 
   constructor(movie: Movie, sequence: number, whenScreened: Date) {
@@ -23,5 +46,18 @@ class Screening {
 
   public getMovieFee(): number {
     return this.movie.getFee();
+  }
+
+  public reserve(customer: Customer, audienceCount: number): Reservation {
+    return new Reservation(
+      customer,
+      this,
+      this.calculateFee(audienceCount),
+      audienceCount
+    );
+  }
+
+  private calculateFee(audienceCount: number): Money {
+    return {};
   }
 }
