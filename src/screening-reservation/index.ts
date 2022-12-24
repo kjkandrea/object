@@ -6,8 +6,16 @@ abstract class Movie {
 
 abstract class Customer {}
 
-abstract class Money {
-  public abstract times(percent: number): Money;
+class Money {
+  private readonly amount: number;
+
+  constructor(amount: number) {
+    this.amount = amount;
+  }
+
+  public times(percent: number): Money {
+    return new Money(this.amount * percent);
+  }
 }
 
 class Reservation {
