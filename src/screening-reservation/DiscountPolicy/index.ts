@@ -46,3 +46,9 @@ export class PercentDiscountPolicy extends DiscountPolicy {
     return screening.getMovieFee().times(this.percent);
   }
 }
+
+export class NoneDiscountPolicy extends DiscountPolicy {
+  protected getDiscountAmount(screening: Screening): Money {
+    return Money.ZERO;
+  }
+}
