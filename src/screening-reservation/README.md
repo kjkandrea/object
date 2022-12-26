@@ -48,3 +48,17 @@ Movie 클래스는 DiscountPolicy 클래스에게 메시지를 전송하지만
 
 **다형성이란 동일한 메시지를 수신했을 때 객체의 타입에 따라 다르게 응답할 수 있는 능력을 의미한다.**
 
+```typescript
+interface DiscountCondition {
+  isSatisfiedBy: (screening: Screening) => boolean;
+}
+```
+
+추상 클래스를 이용해 다형성을 구현했던 할인 정책과 할인 조건은 구현을 공유할 필요가 없기 때문에
+인터페이스를 이용해 타입 계층을 구현했다.
+
+DiscountCondition 인터페이스를 실체화 하고있는 SequenceCondition 과 PeriodCondition 은
+동일한 인터페이스를 공유하며 다형적인 협력에 참여할 수 있다.
+
+이 경우에도 업캐스팅이 적용되며 협력은 다형적이다.
+
