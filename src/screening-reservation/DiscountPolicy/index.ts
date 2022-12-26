@@ -2,8 +2,12 @@ import {Screening} from '../Screening';
 import {Money} from '../Money';
 import {DiscountCondition} from '../DiscountCondition';
 
+interface DiscountPolicy {
+  calculateDiscountAmount(screening: Screening): Money;
+}
+
 // TEMPLATE METHOD 패턴
-export abstract class DiscountPolicy {
+export abstract class DefaultDiscountPolicy implements DiscountPolicy {
   private conditions: DiscountCondition[];
 
   protected constructor(conditions: DiscountCondition[]) {
@@ -21,7 +25,7 @@ export abstract class DiscountPolicy {
   protected abstract getDiscountAmount(screening: Screening): Money;
 }
 
-export class AmountDiscountPolicy extends DiscountPolicy {
+export class AmountDiscountPolicy extends DefaultDiscountPolicy {
   private readonly discountAmount: Money;
 
   constructor(conditions: DiscountCondition[], discountAmount: Money) {
@@ -34,7 +38,7 @@ export class AmountDiscountPolicy extends DiscountPolicy {
   }
 }
 
-export class PercentDiscountPolicy extends DiscountPolicy {
+export class PercentDiscountPolicy extends DefaultDiscountPolicy {
   private readonly percent: number;
 
   constructor(conditions: DiscountCondition[], percent: number) {
@@ -47,12 +51,8 @@ export class PercentDiscountPolicy extends DiscountPolicy {
   }
 }
 
-export class NoneDiscountPolicy extends DiscountPolicy {
-  constructor() {
-    super([]);
-  }
-
-  protected getDiscountAmount(screening: Screening): Money {
+export class NoneDiscountPolicy implements DiscountPolicy {
+  public calculateDiscountAmount(screening: Screening): Money {
     return Money.ZERO;
   }
 }
