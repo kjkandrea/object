@@ -34,3 +34,4 @@ Movie 입장에서는 `discountPolicy` 가 `calculateDiscountAmount` 메시지�
 
 AmountDiscountPolicy 나 PercentDiscountPolicy 모두 DiscountPolicy 를 대신해서 Movie 와 협력할 수 있다.
 
+이처럼 자식 클래스가 부모 클래스를 대신하는것을 **업캐스팅(upcasting)** 이라고 부른다.
