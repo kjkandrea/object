@@ -1,6 +1,4 @@
-abstract class DiscountPolicy {
-  public abstract calculateDiscountAmount(screening: Screening): number;
-}
+import {DiscountPolicy} from './discountPolicy';
 
 class Movie {
   private title: string;
@@ -33,19 +31,25 @@ class Movie {
 
 abstract class Customer {}
 
-class Money {
+export class Money {
+  public static ZERO = Money.wons(0);
+
   private readonly amount: number;
 
   constructor(amount: number) {
     this.amount = amount;
   }
 
+  public static wons(amount: number): Money {
+    return new Money(amount);
+  }
+
   public times(percent: number): Money {
     return new Money(this.amount * percent);
   }
 
-  public minus(amount: number): Money {
-    return new Money(this.amount - amount);
+  public minus(amount: Money): Money {
+    return new Money(this.amount - amount.amount);
   }
 }
 
@@ -68,7 +72,7 @@ class Reservation {
   }
 }
 
-class Screening {
+export class Screening {
   private movie: Movie;
   private readonly sequence: number; // 순번
   private readonly whenScreened: Date; // 상영 시작 시간
