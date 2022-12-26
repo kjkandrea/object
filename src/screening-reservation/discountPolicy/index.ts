@@ -1,4 +1,5 @@
-import {Money, Screening} from '..';
+import {Screening} from '../Screening';
+import {Money} from '../Money';
 
 export interface DiscountCondition {
   isSatisfiedBy: (screening: Screening) => boolean;

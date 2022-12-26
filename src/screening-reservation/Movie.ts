@@ -1,16 +1,17 @@
 import {DiscountPolicy} from './discountPolicy';
 import {Money} from './Money';
 import {Screening} from './Screening';
+import {Duration} from '../global/datetime/Duration';
 
 export class Movie {
   private title: string;
-  private runningTime: number;
+  private runningTime: Duration;
   private readonly fee: Money;
   private discountPolicy: DiscountPolicy;
 
   constructor(
     title: string,
-    runningTime: number,
+    runningTime: Duration,
     fee: Money,
     discountPolicy: DiscountPolicy
   ) {
