@@ -21,6 +21,10 @@ export class Movie {
     this.discountPolicy = discountPolicy;
   }
 
+  public changeDiscountPolicy(discountPolicy: DiscountPolicy): void {
+    this.discountPolicy = discountPolicy;
+  }
+
   public getFee(): Readonly<Money> {
     return this.fee;
   }

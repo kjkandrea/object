@@ -27,6 +27,8 @@ const avatar: Movie = new Movie(
   )
 );
 
+avatar.changeDiscountPolicy(new NoneDiscountPolicy());
+
 const titanic: Movie = new Movie(
   '타이타닉',
   Duration.ofMinute(180),
