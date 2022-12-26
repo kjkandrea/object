@@ -23,7 +23,7 @@ export abstract class DiscountPolicy {
   protected abstract getDiscountAmount(screening: Screening): Money;
 }
 
-class AmountDiscountPolicy extends DiscountPolicy {
+export class AmountDiscountPolicy extends DiscountPolicy {
   private readonly discountAmount: Money;
 
   constructor(conditions: DiscountCondition[], discountAmount: Money) {
@@ -33,6 +33,19 @@ class AmountDiscountPolicy extends DiscountPolicy {
 
   protected getDiscountAmount(screening: Screening): Money {
     return this.discountAmount;
+  }
+}
+
+export class PercentDiscountPolicy extends DiscountPolicy {
+  private readonly percent: number;
+
+  constructor(conditions: DiscountCondition[], percent: number) {
+    super(conditions);
+    this.percent = percent;
+  }
+
+  protected getDiscountAmount(screening: Screening): Money {
+    return screening.getMovieFee().times(this.percent);
   }
 }
 
