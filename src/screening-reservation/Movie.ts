@@ -1,4 +1,4 @@
-import {DiscountPolicy} from './discountPolicy';
+import {DiscountPolicy} from './DiscountPolicy';
 import {Money} from './Money';
 import {Screening} from './Screening';
 import {Duration} from '../global/datetime/Duration';

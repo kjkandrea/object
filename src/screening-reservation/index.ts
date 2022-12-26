@@ -6,7 +6,7 @@ import {
   PercentDiscountPolicy,
   PeriodCondition,
   SequenceCondition,
-} from './discountPolicy';
+} from './DiscountPolicy';
 import {dayOfWeek} from '../global/datetime/dayOfWeek';
 
 const avatar: Movie = new Movie(
