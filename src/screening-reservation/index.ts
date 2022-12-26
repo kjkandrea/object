@@ -1,7 +1,34 @@
-abstract class Movie {
-  public abstract getFee(): number;
-  // 1인당 예매 요금
-  public abstract calculateMovieFee(screening: Screening): Money;
+abstract class DiscountPolicy {
+  public abstract calculateDiscountAmount(screening: Screening): number;
+}
+
+class Movie {
+  private title: string;
+  private runningTime: number;
+  private readonly fee: Money;
+  private discountPolicy: DiscountPolicy;
+
+  constructor(
+    title: string,
+    runningTime: number,
+    fee: Money,
+    discountPolicy: DiscountPolicy
+  ) {
+    this.title = title;
+    this.runningTime = runningTime;
+    this.fee = fee;
+    this.discountPolicy = discountPolicy;
+  }
+
+  public getFee(): Readonly<Money> {
+    return this.fee;
+  }
+
+  public calculateMovieFee(screening: Screening): Readonly<Money> {
+    return this.fee.minus(
+      this.discountPolicy.calculateDiscountAmount(screening)
+    );
+  }
 }
 
 abstract class Customer {}
@@ -15,6 +42,10 @@ class Money {
 
   public times(percent: number): Money {
     return new Money(this.amount * percent);
+  }
+
+  public minus(amount: number): Money {
+    return new Money(this.amount - amount);
   }
 }
 
@@ -56,7 +87,7 @@ class Screening {
     return this.sequence === sequence;
   }
 
-  public getMovieFee(): number {
+  public getMovieFee(): Readonly<Money> {
     return this.movie.getFee();
   }
 
