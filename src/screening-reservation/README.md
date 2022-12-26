@@ -11,3 +11,26 @@
 ### bad
 
 실제 의존성의 대상이 무엇인지 한눈에 찾기 어려워진다.
+
+## 상속
+
+상속이 가치 있는 이유는 부모 클래스의 인터페이스를 자식 클래스가 물려받을 수 있기 때문
+
+결과적으로 자식 클래스는 부모 클래스에서 수신할 수 있는 모든 메시지를 수신할 수 있다.
+
+때문에 외부 객체는 자식 클래스를 부모 클래스와 동일한 타입으로 간주할 수 있다.
+
+```typescript
+class Movie {
+  public calculateMovieFee(screening: Screening): Readonly<Money> {
+    return this.fee.minus(
+      this.discountPolicy.calculateDiscountAmount(screening)
+    );
+  }
+}
+```
+
+Movie 입장에서는 `discountPolicy` 가 `calculateDiscountAmount` 메시지를 수신할 수 있단 점이 중요하다.
+
+AmountDiscountPolicy 나 PercentDiscountPolicy 모두 DiscountPolicy 를 대신해서 Movie 와 협력할 수 있다.
+
