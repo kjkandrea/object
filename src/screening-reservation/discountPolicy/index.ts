@@ -23,6 +23,19 @@ export abstract class DiscountPolicy {
   protected abstract getDiscountAmount(screening: Screening): Money;
 }
 
+class AmountDiscountPolicy extends DiscountPolicy {
+  private readonly discountAmount: Money;
+
+  constructor(conditions: DiscountCondition[], discountAmount: Money) {
+    super(conditions);
+    this.discountAmount = discountAmount;
+  }
+
+  protected getDiscountAmount(screening: Screening): Money {
+    return this.discountAmount;
+  }
+}
+
 // 조조할인 등 순번할인 조건
 export class SequenceCondition implements DiscountCondition {
   private readonly sequence: number;
