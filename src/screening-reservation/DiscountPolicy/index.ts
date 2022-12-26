@@ -48,6 +48,10 @@ export class PercentDiscountPolicy extends DiscountPolicy {
 }
 
 export class NoneDiscountPolicy extends DiscountPolicy {
+  constructor() {
+    super([]);
+  }
+
   protected getDiscountAmount(screening: Screening): Money {
     return Money.ZERO;
   }

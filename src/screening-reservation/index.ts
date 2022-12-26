@@ -3,11 +3,11 @@ import {Duration} from '../global/datetime/Duration';
 import {Money} from './Money';
 import {
   AmountDiscountPolicy,
+  NoneDiscountPolicy,
   PercentDiscountPolicy,
-  PeriodCondition,
-  SequenceCondition,
 } from './DiscountPolicy';
 import {dayOfWeek} from '../global/datetime/dayOfWeek';
+import {SequenceCondition, PeriodCondition} from './DiscountCondition';
 
 const avatar: Movie = new Movie(
   '아바타',
@@ -41,4 +41,11 @@ const titanic: Movie = new Movie(
     ],
     0.1
   )
+);
+
+const starWars: Movie = new Movie(
+  '스타워즈',
+  Duration.ofMinute(210),
+  Money.wons(10000),
+  new NoneDiscountPolicy()
 );
