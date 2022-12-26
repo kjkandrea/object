@@ -38,9 +38,9 @@ export class SequenceCondition implements DiscountCondition {
 
 // 상영 시작 시간이 특정한 기간안에 포함되는지 여부
 export class PeriodCondition implements DiscountCondition {
-  private dayOfWeek: ReturnType<Date['getDay']>;
-  private startTime: Date;
-  private endTime: Date;
+  private readonly dayOfWeek: ReturnType<Date['getDay']>;
+  private readonly startTime: Date;
+  private readonly endTime: Date;
 
   constructor(
     dayOfWeek: ReturnType<Date['getDay']>,
