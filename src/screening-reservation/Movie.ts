@@ -1,5 +1,6 @@
 import {DiscountPolicy} from './discountPolicy';
-import {Money, Screening} from './index';
+import {Money} from './Money';
+import {Screening} from './Screening';
 
 export class Movie {
   private title: string;
