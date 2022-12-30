@@ -1,5 +1,5 @@
 import {DiscountPolicy} from './DiscountPolicy';
-import {Money} from './Money';
+import {Money} from '../global/Money';
 import {Screening} from './Screening';
 import {Duration} from '../../global/datetime/Duration';
 

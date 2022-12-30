@@ -1,4 +1,4 @@
-import {Screening} from '../Screening';
+import {Screening} from '../../role-driven/Screening';
 
 /**
  * 할인 조건을 알고 있다.

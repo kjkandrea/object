@@ -1,6 +1,6 @@
 import {Screening} from '../Screening';
-import {Money} from '../Money';
-import {DiscountCondition} from '../DiscountCondition';
+import {Money} from '../../global/Money';
+import {DiscountCondition} from '../../global/DiscountCondition';
 
 /**
  * 할인 정책을 알고 있다.

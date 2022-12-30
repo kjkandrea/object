@@ -1,13 +1,13 @@
 import {Movie} from './Movie';
 import {Duration} from '../../global/datetime/Duration';
-import {Money} from './Money';
+import {Money} from '../global/Money';
 import {
   AmountDiscountPolicy,
   NoneDiscountPolicy,
   PercentDiscountPolicy,
 } from './DiscountPolicy';
 import {dayOfWeek} from '../../global/datetime/dayOfWeek';
-import {SequenceCondition, PeriodCondition} from './DiscountCondition';
+import {SequenceCondition, PeriodCondition} from '../global/DiscountCondition';
 import {Screening} from './Screening';
 
 const avatar: Movie = new Movie(
