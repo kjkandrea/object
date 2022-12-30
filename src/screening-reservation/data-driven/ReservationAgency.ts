@@ -11,7 +11,6 @@ export class ReservationAgency {
   ): Reservation {
     const movie = screening.getMovie();
 
-    console.log(movie.getDiscountConditions());
     const discountable = movie.getDiscountConditions().some(condition => {
       if (condition.getType() === 'PERIOD') {
         const matchedWeek =

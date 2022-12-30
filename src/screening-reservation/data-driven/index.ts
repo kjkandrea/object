@@ -47,5 +47,7 @@ const reservation = new ReservationAgency().reserve(
 console.log(
   `${new Date(
     '2022-12-26T04:19:07.900Z'
-  ).toLocaleTimeString()} 아바타 관람비 : ${reservation.getAmount()}원`
+  ).toLocaleTimeString()} 아바타 관람비 : ${reservation
+    .getAmount()
+    .toLocaleString('ko-KR')}원`
 );
