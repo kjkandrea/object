@@ -1,6 +1,6 @@
-import {DiscountCondition} from '../global/DiscountCondition';
 import {Money} from '../global/Money';
 import {Duration} from '../../global/datetime/Duration';
+import {DiscountCondition} from './DiscountCondition';
 
 type MovieType = 'AMOUNT_DISCOUNT' | 'PERCENT_DISCOUNT' | 'NONE_DISCOUNT';
 

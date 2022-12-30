@@ -7,3 +7,5 @@ export const dayOfWeek = {
   FRIDAY: 5,
   SATURDAY: 6,
 } as const;
+
+export type Day = keyof typeof dayOfWeek;
