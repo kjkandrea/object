@@ -10,7 +10,7 @@ import {dayOfWeek} from '../../global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition} from './DiscountCondition';
 import {Screening} from './Screening';
 
-const avatar: Movie = new Movie(
+const avatar = new Movie(
   '아바타',
   Duration.ofMinute(120),
   Money.wons(10000),
@@ -28,7 +28,7 @@ const avatar: Movie = new Movie(
   )
 );
 
-const titanic: Movie = new Movie(
+const titanic = new Movie(
   '타이타닉',
   Duration.ofMinute(180),
   Money.wons(11000),
@@ -44,14 +44,14 @@ const titanic: Movie = new Movie(
   )
 );
 
-const starWars: Movie = new Movie(
+const starWars = new Movie(
   '스타워즈',
   Duration.ofMinute(210),
   Money.wons(10000),
   new NoneDiscountPolicy()
 );
 
-const avatarScreening: Screening = new Screening(
+const avatarScreening = new Screening(
   avatar,
   99,
   new Date('2022-12-26T04:19:07.900Z')
