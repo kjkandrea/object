@@ -1,7 +1,7 @@
 import {Screening} from './Screening';
 import {Customer} from './Customer';
-import {Reservation} from './Reservation';
 import {Money} from '../global/Money';
+import {Reservation} from './Reservation';
 
 export class ReservationAgency {
   public reserve(
@@ -11,14 +11,15 @@ export class ReservationAgency {
   ): Reservation {
     const movie = screening.getMovie();
 
+    console.log(movie.getDiscountConditions());
     const discountable = movie.getDiscountConditions().some(condition => {
       if (condition.getType() === 'PERIOD') {
         const matchedWeek =
           screening.getWhenScreened().getDay() === condition.getDayOfWeek();
         const moreThenStartTime =
-          screening.getWhenScreened() >= condition.getStartTime();
+          screening.getWhenScreened() >= condition.getStartTime()!;
         const lessThenEndTime =
-          condition.getEndTime() >= screening.getWhenScreened();
+          condition.getEndTime()! >= screening.getWhenScreened();
 
         return matchedWeek && moreThenStartTime && lessThenEndTime;
       }
@@ -31,10 +32,10 @@ export class ReservationAgency {
       let discountAmount = Money.ZERO;
       switch (movie.getMovieType()) {
         case 'AMOUNT_DISCOUNT':
-          discountAmount = movie.getDiscountAmount();
+          discountAmount = movie.getDiscountAmount()!;
           break;
         case 'PERCENT_DISCOUNT':
-          discountAmount = movie.getFee().times(movie.getDiscountPercent());
+          discountAmount = movie.getFee().times(movie.getDiscountPercent()!);
           break;
       }
       fee = movie.getFee().minus(discountAmount);
