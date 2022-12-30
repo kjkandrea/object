@@ -7,6 +7,10 @@ export class Money {
     this.amount = amount;
   }
 
+  public getAmount(): number {
+    return this.amount;
+  }
+
   public static wons(amount: number): Money {
     return new Money(amount);
   }

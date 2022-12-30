@@ -20,4 +20,8 @@ export class Reservation {
     this.fee = fee;
     this.audienceCount = audienceCount;
   }
+
+  public getAmount(): number {
+    return this.fee.getAmount();
+  }
 }
