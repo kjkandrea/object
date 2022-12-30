@@ -2,6 +2,10 @@ import {Movie} from './Movie';
 import {Money} from './Money';
 import {Customer, Reservation} from './Reservation';
 
+/**
+ * 상영 정보를 알고 있다.
+ * 예매 정보를 생성한다.
+ */
 export class Screening {
   private movie: Movie;
   private readonly sequence: number; // 순번

@@ -2,7 +2,12 @@ import {Screening} from '../Screening';
 import {Money} from '../Money';
 import {DiscountCondition} from '../DiscountCondition';
 
-// TEMPLATE METHOD 패턴
+/**
+ * 할인 정책을 알고 있다.
+ * 할인된 가격을 계산한다.
+ *
+ * TEMPLATE METHOD 패턴
+ */
 export abstract class DiscountPolicy {
   private conditions: DiscountCondition[];
 

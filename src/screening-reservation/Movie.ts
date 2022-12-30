@@ -3,6 +3,10 @@ import {Money} from './Money';
 import {Screening} from './Screening';
 import {Duration} from '../global/datetime/Duration';
 
+/**
+ * 영화 정보를 알고 있다.
+ * 가격을 계산한다.
+ */
 export class Movie {
   private title: string;
   private runningTime: Duration;

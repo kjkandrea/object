@@ -1,5 +1,9 @@
 import {Screening} from '../Screening';
 
+/**
+ * 할인 조건을 알고 있다.
+ * 할인 여부를 판단한다.
+ */
 export interface DiscountCondition {
   isSatisfiedBy: (screening: Screening) => boolean;
 }
