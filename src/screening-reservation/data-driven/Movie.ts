@@ -13,4 +13,24 @@ export class Movie {
   private movieType: MovieType;
   private discountAmount: Money;
   private discountPercent: number;
+
+  public getFee(): Money {
+    return this.fee;
+  }
+
+  public getDiscountConditions(): Readonly<DiscountCondition[]> {
+    return this.discountConditions;
+  }
+
+  public getMovieType(): MovieType {
+    return this.movieType;
+  }
+
+  public getDiscountAmount(): Money {
+    return this.discountAmount;
+  }
+
+  public getDiscountPercent(): number {
+    return this.discountPercent;
+  }
 }

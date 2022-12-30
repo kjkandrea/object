@@ -8,4 +8,4 @@ export const dayOfWeek = {
   SATURDAY: 6,
 } as const;
 
-export type Day = keyof typeof dayOfWeek;
+export type DayOfWeek = typeof dayOfWeek[keyof typeof dayOfWeek];

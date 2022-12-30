@@ -7,4 +7,16 @@ export class Reservation {
   private screening: Screening;
   private fee: Money;
   private audienceCount: number;
+
+  constructor(
+    customer: Customer,
+    screening: Screening,
+    fee: Money,
+    audienceCount: number
+  ) {
+    this.customer = customer;
+    this.screening = screening;
+    this.fee = fee;
+    this.audienceCount = audienceCount;
+  }
 }
