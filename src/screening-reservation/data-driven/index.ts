@@ -3,6 +3,7 @@ import {Duration} from '../../global/datetime/Duration';
 import {Money} from '../global/Money';
 import {DiscountCondition} from './DiscountCondition';
 import {dayOfWeek} from '../../global/datetime/dayOfWeek';
+import {Screening} from './Screening';
 
 const avatar = new Movie(
   '아바타',
@@ -29,4 +30,8 @@ const avatar = new Movie(
   }
 );
 
-console.log(avatar);
+const avatarScreening = new Screening(
+  avatar,
+  99,
+  new Date('2022-12-26T04:19:07.900Z')
+);
