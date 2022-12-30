@@ -1,12 +1,12 @@
 import {Movie} from './Movie';
-import {Duration} from '../global/datetime/Duration';
+import {Duration} from '../../global/datetime/Duration';
 import {Money} from './Money';
 import {
   AmountDiscountPolicy,
   NoneDiscountPolicy,
   PercentDiscountPolicy,
 } from './DiscountPolicy';
-import {dayOfWeek} from '../global/datetime/dayOfWeek';
+import {dayOfWeek} from '../../global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition} from './DiscountCondition';
 import {Screening} from './Screening';
 
