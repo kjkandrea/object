@@ -29,6 +29,10 @@ export abstract class Movie {
     return this.fee;
   }
 
+  protected getFee(): Readonly<Money> {
+    return this.fee;
+  }
+
   private isDiscountable(screening: Screening): boolean {
     return this.discountConditions.some(condition =>
       condition.isSatisfiedBy(screening)
@@ -54,5 +58,24 @@ export class AmountDiscountMovie extends Movie {
 
   protected calculateDiscountAmount(): Money {
     return this.discountAmount;
+  }
+}
+
+export class PercentDiscountMovie extends Movie {
+  private readonly percent: number;
+
+  constructor(
+    title: string,
+    runningTime: Duration,
+    fee: Money,
+    discountConditions: DiscountCondition,
+    percent: number
+  ) {
+    super(title, runningTime, fee, discountConditions);
+    this.percent = percent;
+  }
+
+  protected calculateDiscountAmount(): Money {
+    return this.getFee().times(this.percent);
   }
 }
