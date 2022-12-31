@@ -29,5 +29,18 @@ export abstract class Movie {
     );
   }
 
-  abstract calculateDiscountAmount(): Money;
+  private calculateDiscountAmount(): Money {
+    switch (this.movieType) {
+      case 'AMOUNT_DISCOUNT':
+        return this.calculateAmountDiscountAmount();
+      case 'PERCENT_DISCOUNT':
+        return this.calculatePercentDiscountAmount();
+      case 'NONE_DISCOUNT':
+        return this.calculateNoneDiscountAmount();
+    }
+  }
+
+  abstract calculateAmountDiscountAmount(): Money;
+  abstract calculatePercentDiscountAmount(): Money;
+  abstract calculateNoneDiscountAmount(): Money;
 }
