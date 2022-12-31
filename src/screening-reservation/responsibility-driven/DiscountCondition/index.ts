@@ -36,3 +36,23 @@ export abstract class DiscountCondition {
     return this.sequence === screening.getSequence();
   }
 }
+
+class PeriodCondition {
+  private readonly dayOfWeek: DayOfWeek;
+  private readonly startTime: Date;
+  private readonly endTime: Date;
+
+  constructor(dayOfWeek: DayOfWeek, startTime: Date, endTime: Date) {
+    this.dayOfWeek = dayOfWeek;
+    this.startTime = startTime;
+    this.endTime = endTime;
+  }
+
+  private isSatisfiedBy(screening: Screening): boolean {
+    const matchedWeek = screening.getWhenScreened().getDay() === this.dayOfWeek;
+    const moreThenStartTime = screening.getWhenScreened() >= this.startTime;
+    const lessThenEndTime = this.endTime >= screening.getWhenScreened();
+
+    return matchedWeek && moreThenStartTime && lessThenEndTime;
+  }
+}
