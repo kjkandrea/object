@@ -11,5 +11,14 @@ export abstract class DiscountCondition {
   private readonly startTime: Date;
   private readonly endTime: Date;
 
-  public abstract isSatisfiedBy(screening: Screening): boolean;
+  public isSatisfiedBy(screening: Screening): boolean {
+    if (this.type === 'PERIOD') {
+      return this.isSatisfiedByPeriod(screening);
+    }
+
+    return this.isSatisfiedBySequence(screening);
+  }
+
+  abstract isSatisfiedByPeriod(screening: Screening): boolean;
+  abstract isSatisfiedBySequence(screening: Screening): boolean;
 }
