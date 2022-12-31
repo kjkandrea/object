@@ -3,6 +3,11 @@ import {DayOfWeek} from '../../../global/datetime/dayOfWeek';
 
 type DiscountConditionType = 'SEQUENCE' | 'PERIOD';
 
+/**
+ * 변경에 취약한 클래스
+ *
+ * 새로운 할인 조건이 추가 될때, 순번 조건 로직 변경 시, 기간 조건 판단 로직 변경 시
+ */
 export abstract class DiscountCondition {
   private readonly type: DiscountConditionType;
 
