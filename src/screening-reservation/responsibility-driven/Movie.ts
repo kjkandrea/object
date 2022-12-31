@@ -15,5 +15,19 @@ export abstract class Movie {
   private readonly discountAmount: Money;
   private readonly discountPercent: number;
 
-  public abstract calculateMovieFee(screening: Screening): Money;
+  public calculateMovieFee(screening: Screening): Money {
+    if (this.isDiscountable(screening)) {
+      this.fee.minus(this.calculateDiscountAmount());
+    }
+
+    return this.fee;
+  }
+
+  private isDiscountable(screening: Screening): boolean {
+    return this.discountConditions.some(condition =>
+      condition.isSatisfiedBy(screening)
+    );
+  }
+
+  abstract calculateDiscountAmount(): Money;
 }
