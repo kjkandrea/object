@@ -3,17 +3,23 @@ import {Money} from '../global/Money';
 import {Duration} from '../../global/datetime/Duration';
 import {DiscountCondition} from './DiscountCondition';
 
-type MovieType = 'NONE_DISCOUNT' | 'AMOUNT_DISCOUNT' | 'PERCENT_DISCOUNT';
-
 export abstract class Movie {
   private title: string;
   private runningTime: Duration;
   private readonly fee: Money;
   private readonly discountConditions: DiscountCondition[] = [];
 
-  private readonly movieType: MovieType;
-  private readonly discountAmount: Money;
-  private readonly discountPercent: number;
+  protected constructor(
+    title: string,
+    runningTime: Duration,
+    fee: Money,
+    ...discountConditions: DiscountCondition[]
+  ) {
+    this.title = title;
+    this.runningTime = runningTime;
+    this.fee = fee;
+    this.discountConditions = discountConditions;
+  }
 
   public calculateMovieFee(screening: Screening): Money {
     if (this.isDiscountable(screening)) {
@@ -29,18 +35,5 @@ export abstract class Movie {
     );
   }
 
-  private calculateDiscountAmount(): Money {
-    switch (this.movieType) {
-      case 'AMOUNT_DISCOUNT':
-        return this.calculateAmountDiscountAmount();
-      case 'PERCENT_DISCOUNT':
-        return this.calculatePercentDiscountAmount();
-      case 'NONE_DISCOUNT':
-        return this.calculateNoneDiscountAmount();
-    }
-  }
-
-  abstract calculateAmountDiscountAmount(): Money;
-  abstract calculatePercentDiscountAmount(): Money;
-  abstract calculateNoneDiscountAmount(): Money;
+  protected abstract calculateDiscountAmount(): Money;
 }
