@@ -17,6 +17,14 @@ export class Screening {
     );
   }
 
+  public getWhenScreened(): Date {
+    return this.whenScreened;
+  }
+
+  public getSequence(): number {
+    return this.sequence;
+  }
+
   private calculateFee(audienceCount: number): Money {
     return this.movie.calculateMovieFee(this).times(audienceCount);
   }

@@ -19,6 +19,15 @@ export abstract class DiscountCondition {
     return this.isSatisfiedBySequence(screening);
   }
 
-  abstract isSatisfiedByPeriod(screening: Screening): boolean;
-  abstract isSatisfiedBySequence(screening: Screening): boolean;
+  private isSatisfiedByPeriod(screening: Screening): boolean {
+    const matchedWeek = screening.getWhenScreened().getDay() === this.dayOfWeek;
+    const moreThenStartTime = screening.getWhenScreened() >= this.startTime;
+    const lessThenEndTime = this.endTime >= screening.getWhenScreened();
+
+    return matchedWeek && moreThenStartTime && lessThenEndTime;
+  }
+
+  private isSatisfiedBySequence(screening: Screening): boolean {
+    return this.sequence === screening.getSequence();
+  }
 }
