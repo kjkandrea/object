@@ -79,3 +79,18 @@ export class PercentDiscountMovie extends Movie {
     return this.getFee().times(this.percent);
   }
 }
+
+export class NoneDiscountMovice extends Movie {
+  constructor(
+    title: string,
+    runningTime: Duration,
+    fee: Money,
+    discountConditions: DiscountCondition
+  ) {
+    super(title, runningTime, fee, discountConditions);
+  }
+
+  protected calculateDiscountAmount(): Money {
+    return Money.ZERO;
+  }
+}
