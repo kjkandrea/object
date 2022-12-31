@@ -37,3 +37,22 @@ export abstract class Movie {
 
   protected abstract calculateDiscountAmount(): Money;
 }
+
+export class AmountDiscountMovie extends Movie {
+  private readonly discountAmount: Money;
+
+  constructor(
+    title: string,
+    runningTime: Duration,
+    fee: Money,
+    discountConditions: DiscountCondition,
+    discountAmount: Money
+  ) {
+    super(title, runningTime, fee, discountConditions);
+    this.discountAmount = discountAmount;
+  }
+
+  protected calculateDiscountAmount(): Money {
+    return this.discountAmount;
+  }
+}
