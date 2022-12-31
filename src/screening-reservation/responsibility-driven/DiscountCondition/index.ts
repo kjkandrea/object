@@ -56,3 +56,15 @@ class PeriodCondition {
     return matchedWeek && moreThenStartTime && lessThenEndTime;
   }
 }
+
+class SequenceCondition {
+  private readonly sequence: number;
+
+  constructor(sequence: number) {
+    this.sequence = sequence;
+  }
+
+  private isSatisfiedBy(screening: Screening): boolean {
+    return this.sequence === screening.getSequence();
+  }
+}
