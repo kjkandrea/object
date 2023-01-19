@@ -61,3 +61,19 @@ export class NoneDiscountPolicy extends DiscountPolicy {
     return Money.ZERO;
   }
 }
+
+export class OverlappedDiscountPolicy extends DiscountPolicy {
+  private discountPolicies: DiscountPolicy[]
+
+  constructor(conditions: DiscountCondition[], discountPolicies: DiscountPolicy[]) {
+    super(conditions);
+    this.discountPolicies = discountPolicies
+  }
+
+  protected getDiscountAmount(screening: Screening): Money {
+    return this.discountPolicies.reduce((money, discountPolicy) => {
+      return money.plus(discountPolicy.calculateDiscountAmount(screening));
+    }, Money.ZERO)
+
+  }
+}

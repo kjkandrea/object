@@ -19,6 +19,10 @@ export class Money {
     return new Money(this.amount * percent);
   }
 
+  public plus(amount: Money): Money {
+    return new Money(this.amount + amount.amount)
+  }
+
   public minus(amount: Money): Money {
     return new Money(this.amount - amount.amount);
   }
