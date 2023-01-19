@@ -1,26 +1,34 @@
 import {Movie} from './Movie';
 import {Duration} from '../../global/datetime/Duration';
 import {Money} from '../global/Money';
-import {AmountDiscountPolicy} from './DiscountPolicy';
+import {AmountDiscountPolicy, OverlappedDiscountPolicy, PercentDiscountPolicy} from './DiscountPolicy';
 import {dayOfWeek} from '../../global/datetime/dayOfWeek';
-import {SequenceCondition, PeriodCondition} from './DiscountCondition';
+import {SequenceCondition, PeriodCondition, DiscountCondition} from './DiscountCondition';
 import {Screening} from './Screening';
+
+const avaterDiscountConditions: DiscountCondition[] = [
+  new SequenceCondition(1),
+  new SequenceCondition(10),
+  new PeriodCondition(
+    dayOfWeek.MONDAY,
+    new Date('2022-12-26T04:19:07.900Z'),
+    new Date('2022-12-26T06:19:07.900Z')
+  ),
+]
 
 const avatar = new Movie(
   '아바타',
   Duration.ofMinute(120),
   Money.wons(10000),
-  new AmountDiscountPolicy(
-    [
-      new SequenceCondition(1),
-      new SequenceCondition(10),
-      new PeriodCondition(
-        dayOfWeek.MONDAY,
-        new Date('2022-12-26T04:19:07.900Z'),
-        new Date('2022-12-26T06:19:07.900Z')
-      ),
-    ],
-    Money.wons(800)
+  new OverlappedDiscountPolicy(
+    new AmountDiscountPolicy(
+      avaterDiscountConditions,
+      Money.wons(800)
+    ),
+    new PercentDiscountPolicy(
+      avaterDiscountConditions,
+        0.1
+    )
   )
 );
 
