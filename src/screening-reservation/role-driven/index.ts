@@ -6,34 +6,42 @@ import {dayOfWeek} from '../../global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition, DiscountCondition} from './DiscountCondition';
 import {Screening} from './Screening';
 
-const avatarDiscountConditions: DiscountCondition[] = [
-  new SequenceCondition(1),
-  new SequenceCondition(10),
-  new PeriodCondition(
-    dayOfWeek.MONDAY,
-    new Date('2022-12-26T04:19:07.900Z'),
-    new Date('2022-12-26T06:19:07.900Z')
-  ),
-]
+class Factory {
+  public createAvatarMovie(): Movie {
+    const avatarDiscountConditions: DiscountCondition[] = [
+      new SequenceCondition(1),
+      new SequenceCondition(10),
+      new PeriodCondition(
+        dayOfWeek.MONDAY,
+        new Date('2022-12-26T04:19:07.900Z'),
+        new Date('2022-12-26T06:19:07.900Z')
+      ),
+    ]
 
-const avatar = new Movie(
-  '아바타',
-  Duration.ofMinute(120),
-  Money.wons(10000),
-  new OverlappedDiscountPolicy(
-    new AmountDiscountPolicy(
-      avatarDiscountConditions,
-      Money.wons(800)
-    ),
-    new PercentDiscountPolicy(
-      avatarDiscountConditions,
-        0.1
-    )
-  )
-);
+    return new Movie(
+      '아바타',
+      Duration.ofMinute(120),
+      Money.wons(10000),
+      new OverlappedDiscountPolicy(
+        new AmountDiscountPolicy(
+          avatarDiscountConditions,
+          Money.wons(800)
+        ),
+        new PercentDiscountPolicy(
+          avatarDiscountConditions,
+          0.1
+        )
+      )
+    );
+
+  }
+}
+
+const factory = new Factory()
+
 
 const avatarScreening = new Screening(
-  avatar,
+  factory.createAvatarMovie(),
   99,
   new Date('2022-12-26T04:19:07.900Z')
 );
