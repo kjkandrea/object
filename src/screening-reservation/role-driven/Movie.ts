@@ -1,7 +1,7 @@
 import {DiscountPolicy} from './DiscountPolicy';
 import {Money} from '../global/Money';
 import {Screening} from './Screening';
-import {Duration} from '../../global/datetime/Duration';
+import {Duration} from 'global/datetime/Duration';
 
 /**
  * 영화 정보를 알고 있다.

@@ -1,8 +1,8 @@
 import {Movie} from './Movie';
-import {Duration} from '../../global/datetime/Duration';
+import {Duration} from 'global/datetime/Duration';
 import {Money} from '../global/Money';
 import {AmountDiscountPolicy, OverlappedDiscountPolicy, PercentDiscountPolicy} from './DiscountPolicy';
-import {dayOfWeek} from '../../global/datetime/dayOfWeek';
+import {dayOfWeek} from 'global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition, DiscountCondition} from './DiscountCondition';
 import {Screening} from './Screening';
 
@@ -33,12 +33,10 @@ class Factory {
         )
       )
     );
-
   }
 }
 
 const factory = new Factory()
-
 
 const avatarScreening = new Screening(
   factory.createAvatarMovie(),

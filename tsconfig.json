@@ -1,12 +1,15 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "baseUrl": "./src",
   },
   "include": [
-    "src/**/*.ts",
-    "test/**/*.ts"
+    "./src"
   ]
 }
