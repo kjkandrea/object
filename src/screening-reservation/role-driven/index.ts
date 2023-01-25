@@ -1,7 +1,7 @@
 import {Movie} from './Movie';
 import {Duration} from 'global/datetime/Duration';
 import {Money} from '../global/Money';
-import {AmountDiscountPolicy, OverlappedDiscountPolicy, PercentDiscountPolicy} from './DiscountPolicy';
+import {AmountDiscountPolicy, OverlappedDiscountPolicy, PercentDiscountPolicy} from './discountPolicies';
 import {dayOfWeek} from 'global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition, DiscountCondition} from './DiscountCondition';
 import {Screening} from './Screening';
