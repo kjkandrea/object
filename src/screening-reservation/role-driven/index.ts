@@ -6,7 +6,7 @@ import {dayOfWeek} from '../../global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition, DiscountCondition} from './DiscountCondition';
 import {Screening} from './Screening';
 
-const avaterDiscountConditions: DiscountCondition[] = [
+const avatarDiscountConditions: DiscountCondition[] = [
   new SequenceCondition(1),
   new SequenceCondition(10),
   new PeriodCondition(
@@ -22,11 +22,11 @@ const avatar = new Movie(
   Money.wons(10000),
   new OverlappedDiscountPolicy(
     new AmountDiscountPolicy(
-      avaterDiscountConditions,
+      avatarDiscountConditions,
       Money.wons(800)
     ),
     new PercentDiscountPolicy(
-      avaterDiscountConditions,
+      avatarDiscountConditions,
         0.1
     )
   )
