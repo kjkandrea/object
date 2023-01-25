@@ -25,7 +25,7 @@ export class Screening {
     return this.sequence === sequence;
   }
 
-  public getMovieFee(): Readonly<Money> {
+  public getMovieFee(): Money {
     return this.movie.getFee();
   }
 

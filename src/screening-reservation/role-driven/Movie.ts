@@ -29,7 +29,7 @@ export class Movie {
     this.discountPolicy = discountPolicy;
   }
 
-  public getFee(): Readonly<Money> {
+  public getFee(): Money {
     return this.fee;
   }
 
