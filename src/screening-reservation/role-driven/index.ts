@@ -1,23 +1,10 @@
 import {Movie} from './Movie';
 import {Duration} from 'global/datetime/Duration';
 import {Money} from '../global/Money';
-import {AmountDiscountPolicy, DiscountPolicy, OverlappedDiscountPolicy, PercentDiscountPolicy} from './DiscountPolicy';
+import {AmountDiscountPolicy, OverlappedDiscountPolicy, PercentDiscountPolicy} from './DiscountPolicy';
 import {dayOfWeek} from 'global/datetime/dayOfWeek';
 import {SequenceCondition, PeriodCondition, DiscountCondition} from './DiscountCondition';
 import {Screening} from './Screening';
-
-export class ServiceLocator {
-  private static soleInstance = new ServiceLocator()
-  private discountPolicy: DiscountPolicy;
-
-  public static discountPolicy(): DiscountPolicy {
-    return this.soleInstance.discountPolicy;
-  }
-
-  public static provide(discountPolicy: DiscountPolicy) {
-    this.soleInstance.discountPolicy = discountPolicy;
-  }
-}
 
 class Factory {
   public createAvatarMovie(): Movie {
@@ -31,20 +18,20 @@ class Factory {
       ),
     ]
 
-    ServiceLocator.provide(new OverlappedDiscountPolicy(
-      new AmountDiscountPolicy(
-        avatarDiscountConditions,
-        Money.wons(800)
-      ),
-      new PercentDiscountPolicy(
-        avatarDiscountConditions,
-        0.1
-      )
-    ))
     return new Movie(
       '아바타',
       Duration.ofMinute(120),
       Money.wons(10000),
+      new OverlappedDiscountPolicy(
+        new AmountDiscountPolicy(
+          avatarDiscountConditions,
+          Money.wons(800)
+        ),
+        new PercentDiscountPolicy(
+          avatarDiscountConditions,
+          0.1
+        )
+      )
     );
   }
 }

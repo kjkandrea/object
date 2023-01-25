@@ -2,7 +2,6 @@ import {DiscountPolicy} from './DiscountPolicy';
 import {Money} from '../global/Money';
 import {Screening} from './Screening';
 import {Duration} from 'global/datetime/Duration';
-import {ServiceLocator} from "screening-reservation/role-driven/index";
 
 /**
  * 영화 정보를 알고 있다.
@@ -17,12 +16,17 @@ export class Movie {
   constructor(
     title: string,
     runningTime: Duration,
-    fee: Money
+    fee: Money,
+    discountPolicy: DiscountPolicy
   ) {
     this.title = title;
     this.runningTime = runningTime;
     this.fee = fee;
-    this.discountPolicy = ServiceLocator.discountPolicy();
+    this.discountPolicy = discountPolicy;
+  }
+
+  public changeDiscountPolicy(discountPolicy: DiscountPolicy): void {
+    this.discountPolicy = discountPolicy;
   }
 
   public getFee(): Money {
