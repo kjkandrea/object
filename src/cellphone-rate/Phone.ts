@@ -4,7 +4,7 @@ import Call from 'cellphone-rate/Call';
 
 // 통화 목록을 계산하는 방법이 바뀔 경우만 변경된다.
 abstract class Phone {
-  protected calls: Call[] = [];
+  private calls: Call[] = [];
 
   public call(call: Call) {
     this.calls.push(call);
@@ -24,7 +24,6 @@ abstract class Phone {
 export class RegularPhone extends Phone {
   private readonly amount: Money;
   protected readonly seconds: Seconds;
-  protected calls: Call[] = [];
 
   constructor(amount: Money, seconds: Seconds) {
     super();
