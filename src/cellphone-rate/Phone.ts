@@ -10,6 +10,10 @@ export abstract class Phone {
     this.calls.push(call);
   }
 
+  public getCalls(): Call[] {
+    return this.calls;
+  }
+
   public calculateFee(): Money {
     const fee = this.calls.reduce((totalMoney, call) => {
       totalMoney = totalMoney.plus(this.calculateCallFee(call));
