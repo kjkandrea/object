@@ -3,8 +3,8 @@ import {Seconds} from 'cellphone-rate/types';
 import Call from 'cellphone-rate/Call';
 
 export default class Phone {
-  private amount: Money;
-  private seconds: Seconds;
+  private readonly amount: Money;
+  private readonly seconds: Seconds;
   private calls: Call[] = [];
 
   constructor(amount: Money, seconds: Seconds) {
