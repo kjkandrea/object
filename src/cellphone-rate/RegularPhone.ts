@@ -3,7 +3,7 @@ import {Seconds} from 'cellphone-rate/types';
 import Call from 'cellphone-rate/Call';
 
 // 통화 목록을 계산하는 방법이 바뀔 경우만 변경된다.
-abstract class AbstractPhone {
+abstract class Phone {
   protected calls: Call[] = [];
 
   public call(call: Call) {
@@ -21,7 +21,7 @@ abstract class AbstractPhone {
 }
 
 // 일반 요금제의 통화 한 건을 계산하는 방식이 바뀔 경우에만 변경된다.
-export class Phone extends AbstractPhone {
+export class RegularPhone extends Phone {
   private readonly amount: Money;
   protected readonly seconds: Seconds;
   protected calls: Call[] = [];
@@ -38,7 +38,7 @@ export class Phone extends AbstractPhone {
 }
 
 // 심야 할인 요금제의 통화 한 건을 계산하는 방식이 바뀔 경우에만 변경된다.
-export class NightDiscountPhone extends AbstractPhone {
+export class NightDiscountPhone extends Phone {
   private static LATE_NIGHT_HOUR = 22;
 
   private readonly nightlyAmount: Money;
