@@ -3,6 +3,7 @@ import {
   NightDiscountPhone,
   Phone,
   RegularPhone,
+  TaxableNightDiscountPhone,
   TaxableRegularPhone,
 } from 'cellphone-rate/Phone';
 import {Money} from 'global/Money';
@@ -42,3 +43,16 @@ const nightlyDiscountPhone = new NightDiscountPhone(
 
 calling(nightlyDiscountPhone);
 console.log('nightlyDiscountPhone fee : ', nightlyDiscountPhone.calculateFee());
+
+const taxableNightDiscountPhone = new TaxableNightDiscountPhone(
+  Money.wons(5),
+  Money.wons(2),
+  10 as Seconds,
+  0.05
+);
+
+calling(taxableNightDiscountPhone);
+console.log(
+  'taxableNightDiscountPhone fee : ',
+  taxableNightDiscountPhone.calculateFee()
+);

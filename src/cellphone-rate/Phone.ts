@@ -80,3 +80,21 @@ export class NightDiscountPhone extends Phone {
     return this.regularAmount.times(call.getDurationSeconds() / this.seconds);
   }
 }
+
+export class TaxableNightDiscountPhone extends NightDiscountPhone {
+  private readonly taxRate: number;
+
+  constructor(
+    nightlyAmount: Money,
+    regularAmount: Money,
+    seconds: Seconds,
+    taxRate: number
+  ) {
+    super(nightlyAmount, regularAmount, seconds);
+    this.taxRate = taxRate;
+  }
+
+  protected afterCalculated(fee: Money): Money {
+    return fee.plus(fee.times(this.taxRate));
+  }
+}
