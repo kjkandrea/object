@@ -11,13 +11,15 @@ abstract class Phone {
   }
 
   public calculateFee(): Money {
-    return this.calls.reduce((totalMoney, call) => {
+    const fee = this.calls.reduce((totalMoney, call) => {
       totalMoney = totalMoney.plus(this.calculateCallFee(call));
       return totalMoney;
     }, Money.ZERO);
+    return this.afterCalculated(fee);
   }
 
   protected abstract calculateCallFee(call: Call): Money;
+  protected abstract afterCalculated(fee: Money): Money;
 }
 
 // 일반 요금제의 통화 한 건을 계산하는 방식이 바뀔 경우에만 변경된다.
@@ -33,6 +35,10 @@ export class RegularPhone extends Phone {
 
   protected calculateCallFee(call: Call): Money {
     return this.amount.times(call.getDurationSeconds() / this.seconds);
+  }
+
+  protected afterCalculated(fee: Money): Money {
+    return fee;
   }
 }
 
@@ -57,5 +63,9 @@ export class NightDiscountPhone extends Phone {
     }
 
     return this.regularAmount.times(call.getDurationSeconds() / this.seconds);
+  }
+
+  protected afterCalculated(fee: Money): Money {
+    return fee;
   }
 }
