@@ -5,11 +5,13 @@ import Call from 'cellphone-rate/Call';
 export class Phone {
   private readonly amount: Money;
   private readonly seconds: Seconds;
+  private readonly taxRate: number;
   private calls: Call[] = [];
 
-  constructor(amount: Money, seconds: Seconds) {
+  constructor(amount: Money, seconds: Seconds, taxRate: number) {
     this.amount = amount;
     this.seconds = seconds;
+    this.taxRate = taxRate;
   }
 
   public call(call: Call) {
@@ -29,12 +31,14 @@ export class Phone {
   }
 
   public calculateFee(): Money {
-    return this.calls.reduce((totalMoney, call) => {
+    const fee = this.calls.reduce((totalMoney, call) => {
       totalMoney = totalMoney.plus(
         this.amount.times(call.getDurationSeconds() / this.seconds)
       );
       return totalMoney;
     }, Money.ZERO);
+
+    return fee.plus(fee.times(this.taxRate));
   }
 }
 
@@ -45,12 +49,19 @@ export class NightDiscountPhone {
   private readonly nightlyAmount: Money;
   private readonly regularAmount: Money;
   private readonly seconds: Seconds;
+  private readonly taxRate: number;
   private calls: Call[] = [];
 
-  constructor(nightlyAmount: Money, regularAmount: Money, seconds: Seconds) {
+  constructor(
+    nightlyAmount: Money,
+    regularAmount: Money,
+    seconds: Seconds,
+    taxRate: number
+  ) {
     this.nightlyAmount = nightlyAmount;
     this.regularAmount = regularAmount;
     this.seconds = seconds;
+    this.taxRate = taxRate;
   }
 
   public call(call: Call) {
@@ -75,9 +86,11 @@ export class NightDiscountPhone {
       return this.regularAmount.times(call.getDurationSeconds() / this.seconds);
     };
 
-    return this.calls.reduce((totalMoney, call) => {
+    const fee = this.calls.reduce((totalMoney, call) => {
       totalMoney = totalMoney.plus(calculateCallFee(call));
       return totalMoney;
     }, Money.ZERO);
+
+    return fee.plus(fee.times(this.taxRate));
   }
 }
