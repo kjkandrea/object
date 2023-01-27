@@ -1,8 +1,8 @@
 import {Seconds} from 'cellphone-rate/types';
 
 export default class Call {
-  private from: Date;
-  private to: Date;
+  private readonly from: Date;
+  private readonly to: Date;
 
   constructor(from: Date, to: Date) {
     this.from = from;
