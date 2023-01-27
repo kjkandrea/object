@@ -1,5 +1,5 @@
 import Call from 'cellphone-rate/Call';
-import Phone from 'cellphone-rate/Phone';
+import {NightDiscountPhone, Phone} from 'cellphone-rate/Phone';
 import {Money} from 'global/Money';
 import {Seconds} from 'cellphone-rate/types';
 
@@ -16,4 +16,20 @@ phone.call(
   new Call(new Date('2018-01-02T12:10:00'), new Date('2018-01-02T12:11:00'))
 );
 
-console.log(phone.calculrateFee());
+console.log('phone fee : ', phone.calculateFee());
+
+const nightlyDiscountPhone = new NightDiscountPhone(
+  Money.wons(5),
+  Money.wons(2),
+  10 as Seconds
+);
+
+nightlyDiscountPhone.call(
+  new Call(new Date('2018-01-01T12:10:00'), new Date('2018-01-01T12:11:00'))
+);
+
+nightlyDiscountPhone.call(
+  new Call(new Date('2018-01-02T12:10:00'), new Date('2018-01-02T12:11:00'))
+);
+
+console.log('nightlyDiscountPhone fee : ', nightlyDiscountPhone.calculateFee());

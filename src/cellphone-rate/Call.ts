@@ -12,4 +12,8 @@ export default class Call {
   public getDurationSeconds(): Seconds {
     return ((this.to.getTime() - this.from.getTime()) / 1000) as Seconds;
   }
+
+  public getFrom(): Date {
+    return this.from;
+  }
 }
