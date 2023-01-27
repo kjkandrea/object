@@ -31,7 +31,7 @@ export class Phone {
     return fee.plus(fee.times(this.taxRate));
   }
 
-  private calculateCallFee(call: Call): Money {
+  protected calculateCallFee(call: Call): Money {
     return this.amount.times(call.getDurationSeconds() / this.seconds);
   }
 }
@@ -55,18 +55,19 @@ export class NightDiscountPhone extends Phone {
    * 어거지로 상속을 활용하려다보니 코드가 이해하기 난해해진 모습.
    */
   public calculateFee(): Money {
-    const fee = super.calculateFee();
-
-    const nightlyFee = this.calls.reduce((totalMoney, call) => {
-      if (call.getFrom().getHours() >= NightDiscountPhone.LATE_NIGHT_HOUR) {
-        totalMoney = totalMoney.plus(
-          this.nightlyAmount.times(call.getDurationSeconds() / this.seconds)
-        );
-      }
-
+    const fee = this.calls.reduce((totalMoney, call) => {
+      totalMoney = totalMoney.plus(this.calculateNightCallFee(call));
       return totalMoney;
     }, Money.ZERO);
 
-    return fee.minus(nightlyFee);
+    return fee.plus(fee.times(this.taxRate));
+  }
+
+  private calculateNightCallFee(call: Call): Money {
+    if (call.getFrom().getHours() >= NightDiscountPhone.LATE_NIGHT_HOUR) {
+      return this.nightlyAmount.times(call.getDurationSeconds() / this.seconds);
+    } else {
+      return this.calculateCallFee(call);
+    }
   }
 }
