@@ -1,3 +1,5 @@
+import {Second} from 'cellphone-rate/types';
+
 export default class Call {
   private from: Date;
   private to: Date;
@@ -7,7 +9,7 @@ export default class Call {
     this.to = to;
   }
 
-  public getDuration(): number {
-    return this.to.getTime() - this.from.getTime();
+  public getDurationSecond(): Second {
+    return ((this.to.getTime() - this.from.getTime()) / 1000) as Second;
   }
 }
