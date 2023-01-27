@@ -1,5 +1,5 @@
 import Call from 'cellphone-rate/Call';
-import {NightDiscountPhone, RegularPhone} from 'cellphone-rate/RegularPhone';
+import {NightDiscountPhone, RegularPhone} from 'cellphone-rate/Phone';
 import {Money} from 'global/Money';
 import {Seconds} from 'cellphone-rate/types';
 
