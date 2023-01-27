@@ -1,16 +1,4 @@
-class Call {
-  private from: Date;
-  private to: Date;
-
-  constructor(from: Date, to: Date) {
-    this.from = from;
-    this.to = to;
-  }
-
-  public getDuration(): number {
-    return this.to.getTime() - this.from.getTime();
-  }
-}
+import Call from 'cellphone-rate/Call';
 
 const to = new Date();
 const from = new Date(to.getTime() - 1000 * 60 * 5);
