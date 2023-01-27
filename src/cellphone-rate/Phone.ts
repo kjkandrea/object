@@ -3,7 +3,7 @@ import {Seconds} from 'cellphone-rate/types';
 import Call from 'cellphone-rate/Call';
 
 // 통화 목록을 계산하는 방법이 바뀔 경우만 변경된다.
-abstract class Phone {
+export abstract class Phone {
   private calls: Call[] = [];
 
   public call(call: Call) {
@@ -41,6 +41,19 @@ export class RegularPhone extends Phone {
 
   protected calculateCallFee(call: Call): Money {
     return this.amount.times(call.getDurationSeconds() / this.seconds);
+  }
+}
+
+export class TaxableRegularPhone extends RegularPhone {
+  private readonly taxRate: number;
+
+  constructor(amount: Money, seconds: Seconds, taxRate: number) {
+    super(amount, seconds);
+    this.taxRate = taxRate;
+  }
+
+  protected afterCalculated(fee: Money): Money {
+    return fee.plus(fee.times(this.taxRate));
   }
 }
 
