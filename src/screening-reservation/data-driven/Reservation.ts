@@ -1,5 +1,5 @@
 import {Screening} from './Screening';
-import {Money} from '../global/Money';
+import {Money} from 'global/Money';
 import {Customer} from './Customer';
 
 export class Reservation {

@@ -1,6 +1,6 @@
 import {Screening} from './Screening';
-import {Money} from '../global/Money';
-import {Duration} from '../../global/datetime/Duration';
+import {Money} from 'global/Money';
+import {Duration} from 'global/datetime/Duration';
 import {DiscountCondition} from './DiscountCondition';
 
 export abstract class Movie {

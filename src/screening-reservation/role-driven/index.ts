@@ -1,6 +1,6 @@
 import {Movie} from './Movie';
 import {Duration} from 'global/datetime/Duration';
-import {Money} from '../global/Money';
+import {Money} from 'global/Money';
 import {
   AmountDiscountPolicy,
   OverlappedDiscountPolicy,

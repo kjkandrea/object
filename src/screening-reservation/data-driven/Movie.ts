@@ -1,5 +1,5 @@
-import {Money} from '../global/Money';
-import {Duration} from '../../global/datetime/Duration';
+import {Money} from 'global/Money';
+import {Duration} from 'global/datetime/Duration';
 import {DiscountCondition} from './DiscountCondition';
 
 interface AmountDiscount {

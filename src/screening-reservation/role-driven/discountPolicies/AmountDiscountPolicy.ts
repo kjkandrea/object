@@ -1,7 +1,7 @@
-import {Money} from "screening-reservation/global/Money";
-import {DiscountCondition} from "screening-reservation/role-driven/DiscountCondition";
-import {Screening} from "screening-reservation/role-driven/Screening";
-import {DiscountPolicy} from "screening-reservation/role-driven/DiscountPolicy";
+import {Money} from 'global/Money';
+import {DiscountCondition} from 'screening-reservation/role-driven/DiscountCondition';
+import {Screening} from 'screening-reservation/role-driven/Screening';
+import {DiscountPolicy} from 'screening-reservation/role-driven/DiscountPolicy';
 
 export class AmountDiscountPolicy extends DiscountPolicy {
   private readonly discountAmount: Money;

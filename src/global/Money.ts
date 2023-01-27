@@ -20,7 +20,7 @@ export class Money {
   }
 
   public plus(amount: Money): Money {
-    return new Money(this.amount + amount.amount)
+    return new Money(this.amount + amount.amount);
   }
 
   public minus(amount: Money): Money {

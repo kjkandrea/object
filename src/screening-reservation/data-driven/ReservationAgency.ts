@@ -1,6 +1,6 @@
 import {Screening} from './Screening';
 import {Customer} from './Customer';
-import {Money} from '../global/Money';
+import {Money} from 'global/Money';
 import {Reservation} from './Reservation';
 
 export class ReservationAgency {

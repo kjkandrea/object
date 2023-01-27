@@ -1,5 +1,5 @@
 import {Movie} from './Movie';
-import {Money} from '../global/Money';
+import {Money} from 'global/Money';
 import {Customer, Reservation} from './Reservation';
 
 /**

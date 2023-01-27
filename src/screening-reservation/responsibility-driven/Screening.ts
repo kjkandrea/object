@@ -1,7 +1,7 @@
 import {Reservation} from './Reservation';
 import {Customer} from './Customer';
 import {Movie} from './Movie';
-import {Money} from '../global/Money';
+import {Money} from 'global/Money';
 
 export class Screening {
   private movie: Movie;

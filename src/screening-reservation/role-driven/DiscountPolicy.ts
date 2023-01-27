@@ -1,6 +1,6 @@
-import {DiscountCondition} from "screening-reservation/role-driven/DiscountCondition";
-import {Screening} from "screening-reservation/role-driven/Screening";
-import {Money} from "screening-reservation/global/Money";
+import {DiscountCondition} from 'screening-reservation/role-driven/DiscountCondition';
+import {Screening} from 'screening-reservation/role-driven/Screening';
+import {Money} from 'global/Money';
 
 /**
  * 할인 정책을 알고 있다.

@@ -1,6 +1,6 @@
-import {Screening} from "screening-reservation/role-driven/Screening";
-import {Money} from "screening-reservation/global/Money";
-import {DiscountPolicy} from "screening-reservation/role-driven/DiscountPolicy";
+import {Screening} from 'screening-reservation/role-driven/Screening';
+import {Money} from 'global/Money';
+import {DiscountPolicy} from 'screening-reservation/role-driven/DiscountPolicy';
 
 export class NoneDiscountPolicy extends DiscountPolicy {
   constructor() {
