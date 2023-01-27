@@ -4,9 +4,9 @@ import Call from 'cellphone-rate/Call';
 
 export class Phone {
   private readonly amount: Money;
-  private readonly seconds: Seconds;
-  private readonly taxRate: number;
-  private calls: Call[] = [];
+  protected readonly seconds: Seconds;
+  protected readonly taxRate: number;
+  protected calls: Call[] = [];
 
   constructor(amount: Money, seconds: Seconds, taxRate: number) {
     this.amount = amount;
@@ -18,16 +18,8 @@ export class Phone {
     this.calls.push(call);
   }
 
-  public getCalls(): Call[] {
-    return this.calls;
-  }
-
   public getAmount(): Money {
     return this.amount;
-  }
-
-  public getSeconds(): Seconds {
-    return this.seconds;
   }
 
   public calculateFee(): Money {
@@ -42,15 +34,10 @@ export class Phone {
   }
 }
 
-/** 중복의 해로움 */
-export class NightDiscountPhone {
+export class NightDiscountPhone extends Phone {
   private static LATE_NIGHT_HOUR = 22;
 
   private readonly nightlyAmount: Money;
-  private readonly regularAmount: Money;
-  private readonly seconds: Seconds;
-  private readonly taxRate: number;
-  private calls: Call[] = [];
 
   constructor(
     nightlyAmount: Money,
@@ -58,39 +45,23 @@ export class NightDiscountPhone {
     seconds: Seconds,
     taxRate: number
   ) {
+    super(regularAmount, seconds, taxRate);
     this.nightlyAmount = nightlyAmount;
-    this.regularAmount = regularAmount;
-    this.seconds = seconds;
-    this.taxRate = taxRate;
-  }
-
-  public call(call: Call) {
-    this.calls.push(call);
-  }
-
-  public getCalls(): Call[] {
-    return this.calls;
-  }
-
-  public getSeconds(): Seconds {
-    return this.seconds;
   }
 
   public calculateFee(): Money {
-    const calculateCallFee = (call: Call): Money => {
+    const fee = super.calculateFee();
+
+    const nightlyFee = this.calls.reduce((totalMoney, call) => {
       if (call.getFrom().getHours() >= NightDiscountPhone.LATE_NIGHT_HOUR) {
-        return this.nightlyAmount.times(
-          call.getDurationSeconds() / this.seconds
+        totalMoney = totalMoney.plus(
+          this.nightlyAmount.times(call.getDurationSeconds() / this.seconds)
         );
       }
-      return this.regularAmount.times(call.getDurationSeconds() / this.seconds);
-    };
 
-    const fee = this.calls.reduce((totalMoney, call) => {
-      totalMoney = totalMoney.plus(calculateCallFee(call));
       return totalMoney;
     }, Money.ZERO);
 
-    return fee.plus(fee.times(this.taxRate));
+    return fee.minus(nightlyFee);
   }
 }
