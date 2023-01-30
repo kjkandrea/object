@@ -3,9 +3,9 @@ export class Lecture {
   private readonly title: string;
   private readonly scores: number[];
 
-  constructor(pass: number, title: string, scores: number[]) {
-    this.pass = pass;
+  constructor(title: string, pass: number, scores: number[]) {
     this.title = title;
+    this.pass = pass;
     this.scores = scores;
   }
 
