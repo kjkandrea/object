@@ -3,6 +3,7 @@ import {Phone} from 'cellphone-rate/Phone';
 import {Money} from 'global/Money';
 import {Seconds} from 'cellphone-rate/types';
 import {NightDiscountPolicy, RegularPolicy} from 'cellphone-rate/RatePolicy';
+import {TaxablePolicy} from 'cellphone-rate/RatePolicy/TaxablePolicy';
 
 function calling(phone: Phone) {
   phone.call(
@@ -21,14 +22,12 @@ const regularPhone = new Phone(new RegularPolicy(Money.wons(5), 10 as Seconds));
 calling(regularPhone);
 console.log('regularPhone fee : ', regularPhone.calculateFee());
 
-// const taxableRegularPhone = new TaxableRegularPhone(
-//   Money.wons(5),
-//   10 as Seconds,
-//   0.05
-// );
-//
-// calling(taxableRegularPhone);
-// console.log('taxableRegularPhone fee : ', taxableRegularPhone.calculateFee());
+const taxableRegularPhone = new Phone(
+  new TaxablePolicy(0.05, new RegularPolicy(Money.wons(5), 10 as Seconds))
+);
+
+calling(taxableRegularPhone);
+console.log('taxableRegularPhone fee : ', taxableRegularPhone.calculateFee());
 
 const nightlyDiscountPhone = new Phone(
   new NightDiscountPolicy(Money.wons(5), Money.wons(2), 10 as Seconds)
