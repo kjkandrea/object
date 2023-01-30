@@ -50,15 +50,18 @@ const nightlyDiscountPhone = new Phone(
 calling(nightlyDiscountPhone);
 console.log('nightlyDiscountPhone fee : ', nightlyDiscountPhone.calculateFee());
 
-// const taxableNightDiscountPhone = new TaxableNightDiscountPhone(
-//   Money.wons(5),
-//   Money.wons(2),
-//   10 as Seconds,
-//   0.05
-// );
-//
-// calling(taxableNightDiscountPhone);
-// console.log(
-//   'taxableNightDiscountPhone fee : ',
-//   taxableNightDiscountPhone.calculateFee()
-// );
+const taxableRateDiscountableNightDiscountPhone = new Phone(
+  new RateDiscountablePolicy(
+    Money.wons(15),
+    new TaxablePolicy(
+      0.05,
+      new NightDiscountPolicy(Money.wons(5), Money.wons(2), 10 as Seconds)
+    )
+  )
+);
+
+calling(taxableRateDiscountableNightDiscountPhone);
+console.log(
+  'taxableRateDiscountableNightDiscountPhone fee : ',
+  taxableRateDiscountableNightDiscountPhone.calculateFee()
+);
