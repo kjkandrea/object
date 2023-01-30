@@ -11,8 +11,8 @@ export abstract class AdditionalRatePolicy implements RatePolicy {
 
   public calculateFee(phone: Phone): Money {
     const fee = this.next.calculateFee(phone);
-    return this.afterCalulated(fee);
+    return this.afterCalculated(fee);
   }
 
-  protected abstract afterCalulated(fee: Money): Money;
+  protected abstract afterCalculated(fee: Money): Money;
 }
