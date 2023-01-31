@@ -9,6 +9,10 @@ export class Lecture {
     this.scores = scores;
   }
 
+  public getScores(): number[] {
+    return [...this.scores];
+  }
+
   public average() {
     const total = this.scores.reduce((a, b) => a + b, 0);
     return total / this.scores.length;
