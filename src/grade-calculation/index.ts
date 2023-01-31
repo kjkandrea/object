@@ -1,6 +1,7 @@
 import {Lecture} from 'grade-calculation/Lecture';
 import {GradeLecture} from 'grade-calculation/GradeLecture';
 import {Grade} from 'grade-calculation/Grade';
+import {Professor} from 'grade-calculation/Professor';
 
 const lecture = new Lecture('객체지향 프로그래밍', 70, [81, 96, 75, 50, 45]);
 
@@ -20,3 +21,10 @@ const gradeLecture = new GradeLecture(
 );
 
 console.log(gradeLecture.evaluate());
+
+const professor = new Professor(
+  '다익스트라',
+  new Lecture('알고리즘', 70, [81, 95, 75, 50, 45])
+);
+
+console.log(professor.compileStatistics());
