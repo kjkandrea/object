@@ -5,10 +5,23 @@ import {DateTimeInterval} from 'cellphone-rate/RatePolicy/utils/DateTimeInterval
 import Call from 'cellphone-rate/Call';
 
 export class TimeOfDayDiscountPolicy extends BasicRatePolicy {
-  private starts: Date[] = [];
-  private ends: Date[] = [];
-  private durationSeconds: Seconds[] = [];
-  private amounts: Money[] = [];
+  private readonly starts: Date[] = [];
+  private readonly ends: Date[] = [];
+  private readonly durationSeconds: Seconds[] = [];
+  private readonly amounts: Money[] = [];
+
+  constructor(
+    starts: Date[],
+    ends: Date[],
+    durationSeconds: Seconds[],
+    amounts: Money[]
+  ) {
+    super();
+    this.starts = starts;
+    this.ends = ends;
+    this.durationSeconds = durationSeconds;
+    this.amounts = amounts;
+  }
 
   protected calculateCallFee(call: Call): Money {
     const result = Money.ZERO;
