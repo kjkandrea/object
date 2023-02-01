@@ -1,19 +1,26 @@
 import {Seconds} from 'cellphone-rate/types';
+import {DateTimeInterval} from 'cellphone-rate/RatePolicy/utils/DateTimeInterval';
 
 export default class Call {
-  private readonly from: Date;
-  private readonly to: Date;
+  private readonly dateTimeInterval: DateTimeInterval;
 
   constructor(from: Date, to: Date) {
-    this.from = from;
-    this.to = to;
+    this.dateTimeInterval = new DateTimeInterval(from, to);
   }
 
   public getDurationSeconds(): Seconds {
-    return ((this.to.getTime() - this.from.getTime()) / 1000) as Seconds;
+    return this.dateTimeInterval.durationSeconds();
   }
 
   public getFrom(): Date {
-    return this.from;
+    return this.dateTimeInterval.getFrom();
+  }
+
+  public getTo(): Date {
+    return this.dateTimeInterval.getTo();
+  }
+
+  public getInterval() {
+    return this.dateTimeInterval;
   }
 }

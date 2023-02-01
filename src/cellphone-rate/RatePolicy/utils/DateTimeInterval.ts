@@ -1,3 +1,5 @@
+import {Seconds} from 'cellphone-rate/types';
+
 export class DateTimeInterval {
   private readonly from: Date;
   private readonly to: Date;
@@ -33,8 +35,8 @@ export class DateTimeInterval {
     this.to = to;
   }
 
-  public duration(): number {
-    return this.to.getTime() - this.from.getTime();
+  public durationSeconds(): Seconds {
+    return ((this.to.getTime() - this.from.getTime()) / 1000) as Seconds;
   }
 
   public getFrom(): Date {
