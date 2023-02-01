@@ -8,12 +8,20 @@ export class TimeOfDayDiscountPolicy extends BasicRatePolicy {
   private starts: Date[] = [];
   private ends: Date[] = [];
   private durationSeconds: Seconds[] = [];
-  private amount: Money[] = [];
+  private amounts: Money[] = [];
 
   protected calculateCallFee(call: Call): Money {
     const result = Money.ZERO;
 
-    console.log(call.splitByDay());
+    for (const dateTimeInterval of call.splitByDay()) {
+      for (let i = 0; i < this.starts.length; i += 1) {
+        const from = this.from(dateTimeInterval, this.starts[i]);
+        const to = this.to(dateTimeInterval, this.ends[i]);
+        const percent =
+          (to.getTime() - from.getTime()) / 1000 / this.durationSeconds[i];
+        result.plus(this.amounts[i].times(percent));
+      }
+    }
 
     return result;
   }
