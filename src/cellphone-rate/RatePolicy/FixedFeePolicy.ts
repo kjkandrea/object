@@ -3,7 +3,7 @@ import {Money} from 'global/Money';
 import {Seconds} from 'cellphone-rate/types';
 import Call from 'cellphone-rate/Call';
 
-export class RegularPolicy extends BasicRatePolicy {
+export class FixedFeePolicy extends BasicRatePolicy {
   private readonly amount: Money;
   private readonly seconds: Seconds;
 

@@ -5,5 +5,5 @@
 // console.log('--- data-driven ---');
 // import './screening-reservation/data-driven';
 
-// import './cellphone-rate';
-import './grade-calculation';
+import './cellphone-rate';
+// import './grade-calculation';
