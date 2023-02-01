@@ -46,4 +46,41 @@ export class DateTimeInterval {
   public getTo(): Date {
     return this.to;
   }
+
+  public splitByDay(days?: number): DateTimeInterval[] {
+    if (days === undefined) {
+      if (this.days() > 0) {
+        return this.splitByDay(this.days());
+      }
+
+      return [this];
+    }
+
+    const result: DateTimeInterval[] = [];
+    this.addFirstDay(result);
+    this.addMiddleDays(result, days);
+    this.addLastDay(result);
+
+    return result;
+  }
+
+  private days(): number {
+    return this.to.getDate() - this.from.getDate();
+  }
+
+  private addFirstDay(result: DateTimeInterval[]): void {
+    result.push(DateTimeInterval.toMidnight(this.from));
+  }
+
+  private addMiddleDays(result: DateTimeInterval[], days: number): void {
+    for (let i = 0; i < days; i += 1) {
+      const date = this.from;
+      date.setDate(date.getDate() + i);
+      result.push(DateTimeInterval.during(date));
+    }
+  }
+
+  private addLastDay(result: DateTimeInterval[]): void {
+    result.push(DateTimeInterval.toMidnight(this.to));
+  }
 }

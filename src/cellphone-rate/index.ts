@@ -5,6 +5,7 @@ import {Seconds} from 'cellphone-rate/types';
 import {NightDiscountPolicy, FixedFeePolicy} from 'cellphone-rate/RatePolicy';
 import {TaxablePolicy} from 'cellphone-rate/RatePolicy/TaxablePolicy';
 import {RateDiscountablePolicy} from 'cellphone-rate/RatePolicy/RateDiscountablePolicy';
+import {TimeOfDayDiscountPolicy} from 'cellphone-rate/RatePolicy/TimeOfDayDiscountPolicy';
 
 function calling(phone: Phone) {
   phone.call(
@@ -24,6 +25,16 @@ const fixedFeePhone = new Phone(
 
 calling(fixedFeePhone);
 console.log('fixedFeePhone fee : ', fixedFeePhone.calculateFee());
+
+const timeOfDayFixedFeePhone = new Phone(new TimeOfDayDiscountPolicy());
+
+timeOfDayFixedFeePhone.call(
+  new Call(new Date('2018-01-01T12:10:00'), new Date('2018-01-03T12:11:00'))
+);
+console.log(
+  'timeOfDayFixedFeePhone fee : ',
+  timeOfDayFixedFeePhone.calculateFee()
+);
 
 const taxableFixedFeePhone = new Phone(
   new TaxablePolicy(0.05, new FixedFeePolicy(Money.wons(5), 10 as Seconds))

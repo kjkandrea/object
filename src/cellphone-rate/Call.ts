@@ -20,6 +20,10 @@ export default class Call {
     return this.dateTimeInterval.getTo();
   }
 
+  public splitByDay() {
+    return this.dateTimeInterval.splitByDay();
+  }
+
   public getInterval() {
     return this.dateTimeInterval;
   }
